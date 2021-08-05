@@ -107,3 +107,7 @@ ENV/
  .vscode/
 
 .idea
+.vim
+
+input.jpg
+input1.jpg
