@@ -182,3 +182,6 @@ See [List of languages in development](https://github.com/JaidedAI/EasyOCR/issue
 ## Business Inquiries
 
 For Enterprise Support, [Jaided AI](https://www.jaided.ai/) offers full service for custom OCR/AI systems from building, maintenance and deployment. Click [here](https://www.jaided.ai/contact) to contact us.
+
+
+curl -X POST -H "Content-Type: multipart/form-data" -F 'license=@license.jpeg' http://127.0.0.1:8000/ocr

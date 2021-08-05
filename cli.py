@@ -3,6 +3,7 @@ import easyocr
 import json
 from difflib import SequenceMatcher
 import csv
+from flask import Flask, request
 
 
 def marshal(result):
@@ -33,7 +34,6 @@ def parse_args():
         "-l",
         "--lang",
         nargs='+',
-        required=True,
         type=str,
         help="for languages",
     )
@@ -100,7 +100,6 @@ def parse_args():
     parser.add_argument(
         "-f",
         "--file",
-        required=True,
         type=str,
         help="input file",
     )
@@ -256,9 +255,10 @@ def parse_args():
     return args
 
 
-def main():
+def main(image):
     args = parse_args()
-    reader = easyocr.Reader(lang_list=args.lang,
+
+    reader = easyocr.Reader(lang_list=["fa"],
                             gpu=args.gpu,
                             model_storage_directory=args.model_storage_directory,
                             user_network_directory=args.user_network_directory,
@@ -268,7 +268,7 @@ def main():
                             recognizer=args.recognizer,
                             verbose=args.verbose,
                             quantize=args.quantize)
-    result = reader.readtext(args.file,
+    result = reader.readtext(image,
                              decoder=args.decoder,
                              beamWidth=args.beamWidth,
                              batch_size=args.batch_size,
@@ -296,5 +296,16 @@ def main():
     print(marshal(result))
 
 
+app = Flask(__name__)
+
+
+@app.route('/ocr', methods=['POST'])
+def handler():
+    image = request.files["license"].read()
+    print(type(image))
+
+    return main(image)
+
+
 if __name__ == "__main__":
-    main()
+    app.run(host='0.0.0.0', port=8000)
