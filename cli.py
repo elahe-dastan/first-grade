@@ -1,5 +1,30 @@
 import argparse
 import easyocr
+import json
+from difflib import SequenceMatcher
+import csv
+
+
+def marshal(result):
+    requiredFields = ["شماره ملی", "نام و نام خانوادگی", "تاریخ تولد", "تاریخ صدور", "شماره گواهینامه"]
+    value = {"شماره ملی": "", "نام و نام خانوادگی": "", "تاریخ تولد": "", "تاریخ صدور": "", "شماره گواهینامه": ""}
+
+    for line in result:
+        for field in requiredFields:
+            if SequenceMatcher(None, field, line[1]).ratio() > 0.7:
+                for ans in result:
+                    if abs(line[0][0][1] - ans[0][0][1]) < 7 and line[1] != ans[1]:
+                        value[field] = ans[1]
+
+    with open('license.csv', 'a', encoding='UTF8') as f:
+        writer = csv.writer(f)
+
+        for key, v in value.items():
+            writer.writerow([key, v])
+
+    # Dictionary to JSON Object using dumps() method
+    # Return JSON Object
+    return json.dumps(value, ensure_ascii=False).encode('utf8').decode()
 
 
 def parse_args():
@@ -233,42 +258,42 @@ def parse_args():
 
 def main():
     args = parse_args()
-    reader = easyocr.Reader(lang_list=args.lang,\
-                            gpu=args.gpu,\
-                            model_storage_directory=args.model_storage_directory,\
-                            user_network_directory=args.user_network_directory,\
-                            recog_network=args.recog_network,\
-                            download_enabled=args.download_enabled,\
-                            detector=args.detector,\
-                            recognizer=args.recognizer,\
-                            verbose=args.verbose,\
+    reader = easyocr.Reader(lang_list=args.lang,
+                            gpu=args.gpu,
+                            model_storage_directory=args.model_storage_directory,
+                            user_network_directory=args.user_network_directory,
+                            recog_network=args.recog_network,
+                            download_enabled=args.download_enabled,
+                            detector=args.detector,
+                            recognizer=args.recognizer,
+                            verbose=args.verbose,
                             quantize=args.quantize)
-    for line in reader.readtext(args.file,\
-                                decoder=args.decoder,\
-                                beamWidth=args.beamWidth,\
-                                batch_size=args.batch_size,\
-                                workers=args.workers,\
-                                allowlist=args.allowlist,\
-                                blocklist=args.blocklist,\
-                                detail=args.detail,\
-                                rotation_info=args.rotation_info,\
-                                paragraph=args.paragraph,\
-                                min_size=args.min_size,\
-                                contrast_ths=args.contrast_ths,\
-                                adjust_contrast=args.adjust_contrast,\
-                                text_threshold=args.text_threshold,\
-                                low_text=args.low_text,\
-                                link_threshold=args.link_threshold,\
-                                canvas_size=args.canvas_size,\
-                                mag_ratio=args.mag_ratio,\
-                                slope_ths=args.slope_ths,\
-                                ycenter_ths=args.ycenter_ths,\
-                                height_ths=args.height_ths,\
-                                width_ths=args.width_ths,\
-                                y_ths=args.y_ths,\
-                                x_ths=args.x_ths,\
-                                add_margin=args.add_margin):
-        print(line)
+    result = reader.readtext(args.file,
+                             decoder=args.decoder,
+                             beamWidth=args.beamWidth,
+                             batch_size=args.batch_size,
+                             workers=args.workers,
+                             allowlist=args.allowlist,
+                             blocklist=args.blocklist,
+                             detail=args.detail,
+                             rotation_info=args.rotation_info,
+                             paragraph=args.paragraph,
+                             min_size=args.min_size,
+                             contrast_ths=args.contrast_ths,
+                             adjust_contrast=args.adjust_contrast,
+                             text_threshold=args.text_threshold,
+                             low_text=args.low_text,
+                             link_threshold=args.link_threshold,
+                             canvas_size=args.canvas_size,
+                             mag_ratio=args.mag_ratio,
+                             slope_ths=args.slope_ths,
+                             ycenter_ths=args.ycenter_ths,
+                             height_ths=args.height_ths,
+                             width_ths=args.width_ths,
+                             y_ths=args.y_ths,
+                             x_ths=args.x_ths,
+                             add_margin=args.add_margin)
+    print(marshal(result))
 
 
 if __name__ == "__main__":
