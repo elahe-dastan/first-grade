@@ -1,42 +1,43 @@
-# EasyOCR
+# First Grade
 
-[![PyPI Status](https://badge.fury.io/py/easyocr.svg)](https://badge.fury.io/py/easyocr)
-[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/JaidedAI/EasyOCR/blob/master/LICENSE)
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.to/easyocr)
-[![Tweet](https://img.shields.io/twitter/url/https/github.com/JaidedAI/EasyOCR.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20library:%20EasyOCR%20https://github.com/JaidedAI/EasyOCR)
-[![Twitter](https://img.shields.io/badge/twitter-@JaidedAI-blue.svg?style=flat)](https://twitter.com/JaidedAI)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/elahe-dastan/first-grade/ci?label=ci&logo=github&style=flat-square)
+
+## EasyOCR
 
 Ready-to-use OCR with 80+ [supported languages](https://www.jaided.ai/easyocr) and all popular writing scripts including Latin, Chinese, Arabic, Devanagari, Cyrillic and etc.
 
 [Try Demo on our website](https://www.jaided.ai/easyocr)
 
-## What's new
+### What's new
+
 - 29 June 2021 - Version 1.4
-    - [Instruction](https://github.com/JaidedAI/EasyOCR/blob/master/custom_model.md) on training/using custom recognition model
-    - Example [dataset](https://www.jaided.ai/easyocr/modelhub) for model training
-    - Batched image inference for GPU (thanks [@SamSamhuns](https://github.com/SamSamhuns), see [PR](https://github.com/JaidedAI/EasyOCR/pull/458))
-    - Vertical text support (thanks [@interactivetech](https://github.com/interactivetech)). This is for rotated text, not to be confused with vertical Chinese or Japanese text. (see [PR](https://github.com/JaidedAI/EasyOCR/pull/450))
-    - Output in dictionary format (thanks [@A2va](https://github.com/A2va), see [PR](https://github.com/JaidedAI/EasyOCR/pull/441))
+  - [Instruction](https://github.com/JaidedAI/EasyOCR/blob/master/custom_model.md) on training/using custom recognition model
+  - Example [dataset](https://www.jaided.ai/easyocr/modelhub) for model training
+  - Batched image inference for GPU (thanks [@SamSamhuns](https://github.com/SamSamhuns), see [PR](https://github.com/JaidedAI/EasyOCR/pull/458))
+  - Vertical text support (thanks [@interactivetech](https://github.com/interactivetech)). This is for rotated text, not to be confused with vertical Chinese or Japanese text. (see [PR](https://github.com/JaidedAI/EasyOCR/pull/450))
+  - Output in dictionary format (thanks [@A2va](https://github.com/A2va), see [PR](https://github.com/JaidedAI/EasyOCR/pull/441))
 - 30 May 2021 - Version 1.3.2
-    - Faster greedy decoder (thanks [@samayala22](https://github.com/samayala22))
-    - Fix bug when text box's aspect ratio is disproportional (thanks [iQuartic](https://iquartic.com/) for bug report)
+  - Faster greedy decoder (thanks [@samayala22](https://github.com/samayala22))
+  - Fix bug when text box's aspect ratio is disproportional (thanks [iQuartic](https://iquartic.com/) for bug report)
 - 20 April 2021 - Version 1.3.1
-    - Add support for PIL image (thanks [@prays](https://github.com/prays))
-    - Add Tajik language (tjk)
-    - Update argument setting for command line
-    - Add `x_ths` and `y_ths` to control merging behavior when `paragraph=True`
+  - Add support for PIL image (thanks [@prays](https://github.com/prays))
+  - Add Tajik language (tjk)
+  - Update argument setting for command line
+  - Add `x_ths` and `y_ths` to control merging behavior when `paragraph=True`
 - 21 March 2021 - Version 1.3
-    - Second-generation models: multiple times smaller size, multiple times faster inference, additional characters, comparable accuracy to the first generation models.
+
+  - Second-generation models: multiple times smaller size, multiple times faster inference, additional characters, comparable accuracy to the first generation models.
     EasyOCR will choose the latest model by default but you can also specify which model to use by passing `recog_network` argument when creating `Reader` instance.
     For example, `reader = easyocr.Reader(['en','fr'], recog_network = 'latin_g1')` will use the 1st generation Latin model.
-    - List of all models: [Model hub](https://www.jaided.ai/easyocr/modelhub)
+  - List of all models: [Model hub](https://www.jaided.ai/easyocr/modelhub)
 
 - [Read all released notes](https://github.com/JaidedAI/EasyOCR/blob/master/releasenotes.md)
 
-## What's coming next
+### What's coming next
+
 - Handwritten text support
 
-## Examples
+### Examples
 
 ![example](examples/example.png)
 
@@ -44,18 +45,17 @@ Ready-to-use OCR with 80+ [supported languages](https://www.jaided.ai/easyocr) a
 
 ![example3](examples/example3.png)
 
-
-## Installation
+### Installation
 
 Install using `pip` for stable release,
 
-``` bash
+```bash
 pip install easyocr
 ```
 
 For latest development release,
 
-``` bash
+```bash
 pip install git+git://github.com/jaidedai/easyocr.git
 ```
 
@@ -63,9 +63,9 @@ Note 1: for Windows, please install torch and torchvision first by following the
 
 Note 2: We also provide Dockerfile [here](https://github.com/JaidedAI/EasyOCR/blob/master/Dockerfile).
 
-## Usage
+### Usage
 
-``` python
+```python
 import easyocr
 reader = easyocr.Reader(['ch_sim','en']) # need to run only once to load model into memory
 result = reader.readtext('chinese.jpg')
@@ -73,7 +73,7 @@ result = reader.readtext('chinese.jpg')
 
 Output will be in list format, each item represents bounding box, text and confident level, respectively.
 
-``` bash
+```bash
 [([[189, 75], [469, 75], [469, 165], [189, 165]], '愚园路', 0.3754989504814148),
  ([[86, 80], [134, 80], [134, 128], [86, 128]], '西', 0.40452659130096436),
  ([[517, 81], [565, 81], [565, 123], [517, 123]], '东', 0.9989598989486694),
@@ -83,6 +83,7 @@ Output will be in list format, each item represents bounding box, text and confi
  ([[79, 173], [125, 173], [125, 213], [79, 213]], 'W', 0.9848111271858215),
  ([[529, 173], [569, 173], [569, 213], [529, 213]], 'E', 0.8405593633651733)]
 ```
+
 Note 1: `['ch_sim','en']` is the list of languages you want to read. You can pass
 several languages at once but not all languages can be used together.
 English is compatible with every languages. Languages that share common characters are usually compatible with each other.
@@ -93,11 +94,13 @@ Note 3: The line `reader = easyocr.Reader(['ch_sim','en'])` is for loading model
 
 You can also set `detail` = 0 for simpler output.
 
-``` python
+```python
 reader.readtext('chinese.jpg', detail = 0)
 ```
+
 Result:
-``` bash
+
+```bash
 ['愚园路', '西', '东', '315', '309', 'Yuyuan Rd.', 'W', 'E']
 ```
 
@@ -106,7 +109,7 @@ download it manually from the [model hub](https://www.jaided.ai/easyocr/modelhub
 
 In case you do not have GPU or your GPU has low memory, you can run it in CPU mode by adding gpu = False
 
-``` python
+```python
 reader = easyocr.Reader(['ch_sim','en'], gpu = False)
 ```
 
@@ -126,10 +129,12 @@ $ easyocr -l ch_sim en -f chinese.jpg --detail=1 --gpu=True
 
 - Handwritten support
 - Restructure code to support swappable detection and recognition algorithm.
-The api should be as easy as
-``` python
+  The api should be as easy as
+
+```python
 reader = easyocr.Reader(['en'], detection='DB', recognition = 'Transformer')
 ```
+
 The idea is to be able to plug-in any state-of-the-art model into EasyOCR. There are a lot of geniuses trying to make better detection/recognition model. We are not trying to be a genius here, just make genius's works quickly accessible to the public ... for free. (well I believe most geniuses want their work to create positive impact as fast/big as possible) The pipeline should be something like below diagram. Grey slots are placeholders for changeable light blue modules.
 
 ![plan](examples/easyocr_framework.jpeg)
@@ -142,7 +147,7 @@ All deep learning part is based on [Pytorch](https://pytorch.org). :heart:
 
 Detection part is using CRAFT algorithm from this [official repository](https://github.com/clovaai/CRAFT-pytorch) and their [paper](https://arxiv.org/abs/1904.01941) (Thanks @YoungminBaek from @clovaai). We also use their pretrained model.
 
-Recognition model is CRNN ([paper](https://arxiv.org/abs/1507.05717)). It is composed of 3 main components, feature extraction (we are currently using [Resnet](https://arxiv.org/abs/1512.03385)), sequence labeling ([LSTM](https://www.bioinf.jku.at/publications/older/2604.pdf)) and decoding ([CTC](https://www.cs.toronto.edu/~graves/icml_2006.pdf)). Training pipeline for recognition part is a modified version from  [deep-text-recognition-benchmark](https://github.com/clovaai/deep-text-recognition-benchmark). (Thanks @ku21fan from @clovaai) This repository is a gem that deserved more recognition.
+Recognition model is CRNN ([paper](https://arxiv.org/abs/1507.05717)). It is composed of 3 main components, feature extraction (we are currently using [Resnet](https://arxiv.org/abs/1512.03385)), sequence labeling ([LSTM](https://www.bioinf.jku.at/publications/older/2604.pdf)) and decoding ([CTC](https://www.cs.toronto.edu/~graves/icml_2006.pdf)). Training pipeline for recognition part is a modified version from [deep-text-recognition-benchmark](https://github.com/clovaai/deep-text-recognition-benchmark). (Thanks @ku21fan from @clovaai) This repository is a gem that deserved more recognition.
 
 Beam search code is based on this [repository](https://github.com/githubharald/CTCDecoder) and his [blog](https://towardsdatascience.com/beam-search-decoding-in-ctc-trained-neural-networks-5a889a3d85a7). (Thanks @githubharald)
 
@@ -158,7 +163,7 @@ Let's advance humanity together by making AI available to everyone!
 
 **Coder:** Please send PR for small bug/improvement. For bigger one, discuss with us by open an issue first. There is a list of possible bug/improvement issue tagged with ['PR WELCOME'](https://github.com/JaidedAI/EasyOCR/issues?q=is%3Aissue+is%3Aopen+label%3A%22PR+WELCOME%22).
 
-**User:** Tell us how EasyOCR benefit you/your organization to encourage further development. Also post failure cases in [Issue  Section](https://github.com/JaidedAI/EasyOCR/issues) to help improving future model.
+**User:** Tell us how EasyOCR benefit you/your organization to encourage further development. Also post failure cases in [Issue Section](https://github.com/JaidedAI/EasyOCR/issues) to help improving future model.
 
 **Tech leader/Guru:** If you found this library useful, please spread the word! (See [Yann Lecun's post](https://www.facebook.com/yann.lecun/posts/10157018122787143) about EasyOCR)
 
@@ -166,12 +171,13 @@ Let's advance humanity together by making AI available to everyone!
 
 To request a new language support, I need you to send a PR with 2 following files
 
-1. In folder [easyocr/character](https://github.com/JaidedAI/EasyOCR/tree/master/easyocr/character),
-we need 'yourlanguagecode_char.txt' that contains list of all characters. Please see format example from other files in that folder.
+1. In folder [easyocr/character](https://github.com/elahe-dastan/first-grade/tree/main/easyocr/character),
+   we need 'yourlanguagecode_char.txt' that contains list of all characters. Please see format example from other files in that folder.
+
 2. In folder [easyocr/dict](https://github.com/JaidedAI/EasyOCR/tree/master/easyocr/dict),
-we need 'yourlanguagecode.txt' that contains list of words in your language.
-On average we have ~30000 words per language with more than 50000 words for popular one.
-More is better in this file.
+   we need 'yourlanguagecode.txt' that contains list of words in your language.
+   On average we have ~30000 words per language with more than 50000 words for popular one.
+   More is better in this file.
 
 If your language has unique elements (such as 1. Arabic: characters change form when attach to each other + write from right to left 2. Thai: Some characters need to be above the line and some below), please educate me with your best ability and/or give useful links. It is important to take care of the detail to achieve a system that really works.
 
@@ -183,5 +189,6 @@ See [List of languages in development](https://github.com/JaidedAI/EasyOCR/issue
 
 For Enterprise Support, [Jaided AI](https://www.jaided.ai/) offers full service for custom OCR/AI systems from building, maintenance and deployment. Click [here](https://www.jaided.ai/contact) to contact us.
 
-
+```sh
 curl -X POST -H "Content-Type: multipart/form-data" -F 'license=@license.jpeg' http://127.0.0.1:8000/ocr
+```
