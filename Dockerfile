@@ -45,5 +45,7 @@ USER appuser
 # Install application into container
 COPY . .
 
+EXPOSE 8000
+
 # Run the application
 ENTRYPOINT ["python", "cli.py"]
