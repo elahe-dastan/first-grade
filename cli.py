@@ -17,7 +17,7 @@ def marshal(result):
                     if abs(line[0][0][1] - ans[0][0][1]) < 7 and line[1] != ans[1]:
                         value[field] = ans[1]
 
-    with open('license.csv', 'a', encoding='UTF8') as f:
+    with open('csv/license.csv', 'a', encoding='UTF8') as f:
         writer = csv.writer(f)
 
         for key, v in value.items():

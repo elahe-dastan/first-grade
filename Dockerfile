@@ -37,9 +37,11 @@ RUN apt-get update -y && \
 COPY --from=python-deps /.venv /.venv
 ENV PATH="/.venv/bin:$PATH"
 
+
 # Create and switch to a new user
 RUN useradd --create-home appuser
 WORKDIR /home/appuser
+RUN mkdir csv
 USER appuser
 
 # Install application into container
