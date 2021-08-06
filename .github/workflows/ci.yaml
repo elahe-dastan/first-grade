@@ -3,6 +3,21 @@ name: ci
 on:
   - push
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install pipenv
+        run: |
+          python -m pip install --upgrade pipenv wheel
+      - name: install dependencies
+        run: pipenv install
   docker:
     name: docker
     runs-on: ubuntu-latest
