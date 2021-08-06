@@ -9,6 +9,7 @@ RUN apt-get update -y && \
     libxrender-dev \
     libgl1-mesa-dev \
     git \
+    flask \
     # cleanup
     && apt-get autoremove -y \
     && apt-get clean -y \
@@ -19,6 +20,8 @@ RUN mkdir "/app" \
     && git clone "https://github.com/elahe-dastan/first-grade.git" "/app" \
     && cd "/app"
 
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
 # Build
 RUN cd "/app" \
     && python setup.py build_ext --inplace -j 4 \
