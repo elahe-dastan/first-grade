@@ -13,6 +13,7 @@ scikit-image = "*"
 python-bidi = "*"
 Pillow = "*"
 PyYAML = "*"
+flask = "*"
 
 [dev-packages]
 
