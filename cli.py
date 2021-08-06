@@ -293,7 +293,7 @@ def main(image):
                              y_ths=args.y_ths,
                              x_ths=args.x_ths,
                              add_margin=args.add_margin)
-    print(marshal(result))
+    return marshal(result)
 
 
 app = Flask(__name__)
