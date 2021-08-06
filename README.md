@@ -6,8 +6,6 @@
 
 Ready-to-use OCR with 80+ [supported languages](https://www.jaided.ai/easyocr) and all popular writing scripts including Latin, Chinese, Arabic, Devanagari, Cyrillic and etc.
 
-[Try Demo on our website](https://www.jaided.ai/easyocr)
-
 ### What's new
 
 - 29 June 2021 - Version 1.4
