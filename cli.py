@@ -1,9 +1,12 @@
 import argparse
-import easyocr
+import csv
 import json
 from difflib import SequenceMatcher
-import csv
+
 from flask import Flask, request
+from gevent.wsgi import WSGIServer
+
+import easyocr
 
 
 def marshal(result):
@@ -306,6 +309,13 @@ def handler():
 
     return main(image)
 
+@app.route('/healthz')
+def healthz():
+    return 'ok'
+
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+    ip = "0.0.0.0"
+    port = 8000
+    http_server = WSGIServer((ip, port), application=app)
+    http_server.serve_forever()
