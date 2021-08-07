@@ -4,7 +4,7 @@ import json
 from difflib import SequenceMatcher
 
 from flask import Flask, request
-from gevent.wsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 
 import easyocr
 
